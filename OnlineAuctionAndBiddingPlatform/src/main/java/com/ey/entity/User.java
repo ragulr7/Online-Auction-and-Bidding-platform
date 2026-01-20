@@ -24,6 +24,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	
 	private Role role;
+	private String status;
+	
 	public Long getUserId() {
 		return userId;
 	}
@@ -60,7 +62,7 @@ public class User {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	private String status;
+	
 	
 
 }

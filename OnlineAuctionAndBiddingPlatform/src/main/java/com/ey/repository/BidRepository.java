@@ -10,5 +10,6 @@ import com.ey.entity.Bid;
 @Repository
 public interface BidRepository extends JpaRepository<Bid , Long> {
 	List<Bid> findByAuctionId(Long auctionId);
+	
 
 }

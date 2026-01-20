@@ -10,4 +10,6 @@ public interface BidService {
 	BidResponse placeBid(Long auctionId , BidRequest req);
 
 	List<Bid> getBidsByAuction(Long auctionId);
+	Double getHighestBidForAuction(Long auctionId);
+
 }

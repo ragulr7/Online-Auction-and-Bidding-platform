@@ -8,11 +8,14 @@ import com.ey.dto.response.ProductResponse;
 import jakarta.validation.Valid;
 
 public interface ProductService {
+	
 
 	ProductResponse createProduct(@Valid ProductRequest req);
-
+	ProductResponse approveProduct(Long productId);
+	ProductResponse rejectProduct(Long productId);
 	ProductResponse getProductById(Long productId);
-
-	List<ProductResponse> getProductsBySeller(Long sellerId); 
+	List<ProductResponse> getProductsBySeller(Long sellerId);
+    List<ProductResponse> getAllProducts(); 
+	
 
 }

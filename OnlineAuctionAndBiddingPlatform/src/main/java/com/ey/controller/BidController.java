@@ -2,6 +2,7 @@ package com.ey.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,8 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/auctions")
 public class BidController {
-	
-	private final BidService bidService;
-	
-	public BidController(BidService bidService) {
-		this.bidService = bidService;
-	}
+	@Autowired
+	private BidService bidService;
 	
     @PostMapping("/{auctionId}/bids")
 	public ResponseEntity<BidResponse> placeBid(
@@ -38,6 +35,14 @@ public class BidController {
     public ResponseEntity<List<Bid>> getBidsByAuction(
             @PathVariable Long auctionId) {
         return ResponseEntity.ok(bidService.getBidsByAuction(auctionId));
+    }
+    @GetMapping("/{auctionId}/highest-bid")
+    public ResponseEntity<Double> getHighestBid(
+            @PathVariable Long auctionId) {
+
+        return ResponseEntity.ok(
+                bidService.getHighestBidForAuction(auctionId)
+        );
     }
 
 	

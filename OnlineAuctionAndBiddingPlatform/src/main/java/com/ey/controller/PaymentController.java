@@ -1,5 +1,6 @@
 package com.ey.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +19,10 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/payments")
 public class PaymentController {
-	private final PaymentService paymentService;
+	@Autowired
+	private  PaymentService paymentService;
 
-	public PaymentController(PaymentService paymentService) {
-		super();
-		this.paymentService = paymentService;
-	}
-
+	
 	@PostMapping("/{auctionId}")
 		public ResponseEntity<PaymentResponse> makePayment(@PathVariable Long auctionId,
 				@Valid @RequestBody PaymentRequest req){
@@ -37,6 +35,13 @@ public class PaymentController {
 	        @PathVariable Long paymentId) {
 	    return ResponseEntity.ok(paymentService.getPaymentById(paymentId));
 	}
+	@GetMapping("/auction/{auctionId}")
+    public ResponseEntity<PaymentResponse> getPaymentByAuctionId(
+            @PathVariable Long auctionId) {
+        return ResponseEntity.ok(
+                paymentService.getPaymentByAuctionId(auctionId)
+        );
+    }
 
 	
 }
